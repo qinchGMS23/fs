@@ -1,8 +1,8 @@
 # -*- encoding:utf-8 -*-
 ''''
-@Time : 2024/08/09/ 10:13:08
+@Time : 2024/08/11/ 02:02:45
 @Author : 氢気氚 | qinch
-@Version : 1.0.3
+@Version : 1.0.4
 @Contact : BlueRect@outlook.com
 '''
 import sys
@@ -142,20 +142,20 @@ class Conseols(cmd.Cmd):
                     self.line += 1
             self.prompt = f"[{self.F.name}]@{self.State}-[{self.line+1}]~>"
         else:
-            self.line = int(arg) - 1
-            while True:
-                try:
-                    temp = input(f"[{self.F.name}]@{self.State}-[{self.line+1}]~>")
-                    if temp == "-end":
-                        self.State = o
-                        break
-                    else:
-                        self.Virtual_Text[self.line] = temp+"\n"
-                        self.line += 1
-                except IndexError:
-                    self.Virtual_Text.append(temp+"\n")
-                except ValueError:
-                    print(self.Error_Code[3])
+            try:
+                self.line = int(arg) - 1
+                while True:
+                        temp = input(f"[{self.F.name}]@{self.State}-[{self.line+1}]~>")
+                        if temp == "-end":
+                            self.State = o
+                            break
+                        else:
+                            self.Virtual_Text[self.line] = temp+"\n"
+                            self.line += 1
+            except IndexError:
+                self.Virtual_Text.append(temp+"\n")
+            except ValueError:
+                print(self.Error_Code[3])
     def do_del(self, arg):
         '删除多行或指定删除单行'
         parameter = arg.split( )
